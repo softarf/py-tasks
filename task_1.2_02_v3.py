@@ -19,17 +19,16 @@ elif not (18 <= int(input(' Введите возраст призывника: 
 elif int(input(' Укажите количество детей: ')) >= 2:
     pass
 elif input(' Учится ли он сейчас (y/n): ').lower() == 'n':
-        not_fit = False
-        if 160 <= height <= 169:
-            print('\n Годен. Танковые войска.\n')
-        elif 170 <= height <= 179:
-            print('\n Годен. Морской флот.\n')
-        elif 180 <= height <= 200:
-            print('\n Годен. Десантные войска.\n')
-        elif height > 200:
-            print('\n Годен. Другие войска.\n')
+    not_fit = False
+    if 160 <= height <= 169:
+        print('\n Годен. Танковые войска.\n')
+    elif 170 <= height <= 179:
+        print('\n Годен. Морской флот.\n')
+    elif 180 <= height <= 200:
+        print('\n Годен. Десантные войска.\n')
+    elif height > 200:
+        print('\n Годен. Другие войска.\n')
 if not_fit:
-  print('\n К службе не годен.')
+    print('\n К службе не годен.')
 
-#print('\n  -- Конец --  ')  #                 - Для блокнота
 input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для среды
