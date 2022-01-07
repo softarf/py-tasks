@@ -34,11 +34,23 @@ cook_book = [
 ]
 person = int(input('\n Укажите количество ожидаемых гостей: '))
 print('\n     Необходимо закупить:')
+
+#        Первый вариант
+'''
 n = 1
 for dish in cook_book:
     print(f'\n     {dish[0].capitalize()}:')
-    for ingradient in dish[1]:
-        print(f'{n:>3}. {ingradient[0]}, {ingradient[1] * person} {ingradient[2]}')
+    for component in dish[1]:
+        print(f'{n:>3}. {component[0]}, {component[1] * person} {component[2]}')
+        n += 1
+'''
+
+#        Второй вариант
+n = 1
+for dish_name, composition in cook_book:
+    print(f'\n     {dish_name.capitalize()}:')
+    for ingradient, weight, unit in composition:
+        print(f'{n:>3}. {ingradient}, {weight * person} {unit}')
         n += 1
 
 input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для среды
