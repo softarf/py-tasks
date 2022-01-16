@@ -15,7 +15,9 @@ for channel, volume in stats.items():
 print('}')
 
 print('\n Вывод:')
-stat_max = max(stats.items(), key=lambda x: x[1])           # Мой вариант
-print(f" Канал с максимальным объёмом: '{stat_max[0]}'")
+#stat_max = max(stats.items(), key=lambda x: x[1])           # Мой вариант
+#print(f" Канал с максимальным объёмом: '{stat_max[0]}'")
+stat_max = max(stats, key=stats.get)    # Вариант проверившего, Александр Бардин
+print(f" Канал с максимальным объёмом: '{stat_max}'")
 
 input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для консоли
