@@ -1,6 +1,15 @@
 
 # coding: utf-8        # -*- coding: utf-8 -*-
 
+'''
+19.01.22
+Не успел реализовать функции "Перенос документа на другую полку"
+и "Создание новой полки".
+Может к окончанию проверки успею.
+20.01.22
+Добавил функции "Перенос документа на другую полку"
+и "Создание новой полки".
+'''
 def print_docs(my_docs):
     print(' Документы: documents = [', end='')
     idx = 0
@@ -35,6 +44,7 @@ def desiring_person(my_docs):
 			break
 	if indicate:
 		print(f"\n Нет документа с номером '{num_doc}'")
+	# print_docs(my_docs)  # Для теста
 	return
 	
 def desiring_shelf(my_dirs):
@@ -47,6 +57,7 @@ def desiring_shelf(my_dirs):
 			break
 	if indicate:
 		print(f"\n Нет документа с номером '{num_doc}'")
+	# print_dirs(my_dirs)  # Для теста
 	return
 		
 def listing_docs(my_docs):
@@ -60,10 +71,11 @@ def listing_docs(my_docs):
 			else:
 				print(f' {document[key]} ', end=' ')
 		print()
+	# print_docs(my_docs)  # Для теста
 	return
 		
 def create_new_doc(my_docs, my_dirs):
-	indicate = True
+	ind_quite = True
 	print('\n Создание нового документа (q - отмена).')
 	my_type = input(' Введите тип документа: ')
 	if my_type.strip().lower() != 'q':
@@ -80,15 +92,16 @@ def create_new_doc(my_docs, my_dirs):
 							my_docs.append(new_doc)
 							my_dirs[my_shelf].append(new_doc["number"])
 							print('\n Запись добавлена')
-							indicate = False
+							ind_quite = False
 							bool_while = False
 						else:
 							print('\n Нет такой полки')
 					else:
 						bool_while = False
-	if indicate:
+	if ind_quite:
 		print('\n Операция отменена')
-	# pr_queries(my_docs, my_dirs)  # Для теста
+	# print_docs(my_docs)  # Для теста
+	# print_dirs(my_dirs)  # Для теста
 	return
 			
 def delete_doc(my_docs, my_dirs):
@@ -114,71 +127,83 @@ def delete_doc(my_docs, my_dirs):
 		else:
 			print('\n Операция отменена')
 			while_num = False
+	# print_docs(my_docs)  # Для теста
+	# print_dirs(my_dirs)  # Для теста
 	return
 	
-def change_dir(my_docs, my_dirs):
+# def change_dir(my_docs, my_dirs):
+# 	print('\n Операция временно не доступна.')
+# 	return
+	
+def change_dir(my_dirs):
 	print('\n Перенос документа на другую полку (q - отмена).')
+	ind_quite = True
 	while_num = True
 	while while_num:
 		num_doc = input(' Введите номер документа: ')
 		if num_doc.strip().lower() != 'q':
-			ind_num = True
-			for doc in my_docs:
-				if num_doc == doc["number"]:
-					ind_num = False
-					for old_shelf in my_dirs.keys():
-						if num_doc in my_dirs[old_shelf]:
-							indicate = False
-							print(f" Искомая полка: '{old_shelf}'")
-							break
-					while_dir = True
-					while while_dir:
-						new_shelf = input(' Введите номер полки: ')
-						if new_shelf.strip().lower() != 'q':
-							ind_dir = True
+			old_shelf = None
+			for key in my_dirs.keys():
+				if num_doc in my_dirs[key]:
+					old_shelf = key
+			if old_shelf is not None:
+				while_dir = True
+				while while_dir:
+					new_shelf = input(' Введите номер полки: ')
+					if new_shelf.strip().lower() != 'q':
+						if new_shelf != old_shelf:
 							if new_shelf in my_dirs.keys():
-
+								# Добавляем на новую полку
+								my_dirs[new_shelf].append(num_doc)
 								# Удаляем из старой полки
-								# Заносим на новую полку
-								pass
+								my_dirs[old_shelf].remove(num_doc)
+								print(f"\n Документ '{num_doc}' перенесён")
+								while_dir = False
+								while_num = False
+								ind_quite = False
 							else:
 								print('\n Нет такой полки')
 						else:
-							# print('\n Операция отменена')
-							while_dir = False
-							while_num = False
-					###
-					for key in my_dirs:
-						if num_doc in my_dirs[key]:
-							my_dirs[key].remove(num_doc)
-							break
-					print(f"\n Документ '{num_doc}' удалён")
-					indicate = False
-					while_num = False
-					break
-					###
-				else:
-					print('\n Нет такого документа')
+							print('\n Документ находится как раз на этой полке')
+					else:
+						# print('\n Операция отменена')
+						while_num = False
+						while_dir = False
+			else:
+				print('\n Нет такого документа')
+		else:
+			# print('\n Операция отменена')
+			while_num = False
+	if ind_quite:
+		print('\n Операция отменена')
+	# print_dirs(my_dirs)  # Для теста
+	return
+
+# def create_new_shelf(my_dirs):
+# 	print('\n Операция временно не доступна.')
+# 	return
+
+def create_new_shelf(my_dirs):
+	print('\n Создание новой полки (q - отмена).')
+	ind_while = True
+	while ind_while:
+		new_shelf = input(' Введите номер для новой полки: ')
+		if new_shelf.strip().lower() != 'q':
+			if new_shelf not in my_dirs.keys():
+				# Создаём новую полку
+				my_dirs.update({new_shelf: []})
+				print(f"\n Создана новая полка '{new_shelf}'")
+				ind_while = False
+			else:
+				print('\n Такая полка уже существует')
 		else:
 			print('\n Операция отменена')
-			while_num = False
-	return
-									###
-def create_new_shelf(my_dirs):
-	print('\n Перенос документа на другую полку (q - отмена).')
-	indicate = True
-	num_doc = input(' Введите номер документа: ')
-	for doc_key in my_dirs.keys():
-		if num_doc in my_dirs[doc_key]:
-			indicate = False
-			print(f" Искомая полка: '{doc_key}'")
-			break
-	if indicate:
-		print(f"\n Нет документа с номером '{num_doc}'")
+			ind_while = False
+	# print_dirs(my_dirs)  # Для теста
 	return
 
 
-print('\n    Задача 1. Раздел 1.5')
+print('\n    Задача 1 и Задача 2. Раздел 1.5')
 documents = [
         {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
         {"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
@@ -212,7 +237,7 @@ while bool_repeat:
 	elif assign == 'd':
 		delete_doc(documents, directories)
 	elif assign == 'm':
-		change_dir(documents, directories)
+		change_dir(directories)
 	elif assign == 'as':
 		create_new_shelf(directories)
 	elif assign == 'q':  # quite_work 
@@ -227,4 +252,9 @@ while bool_repeat:
 
 print('\n -- Конец --')
 
-# input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для среды
+# Для теста:
+print('\n Окончательное состояние.')
+print_docs(documents)
+print_dirs(directories)
+
+input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для среды
