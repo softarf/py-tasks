@@ -10,11 +10,11 @@ print()
 for index in ls2:
 	print(index, end='\t')
 print()
-							  # Создаём пустой словарь
+								# Создаём пустой словарь
 my_dict = {}
 my_dict2 = dict()
-for i in range(3):            # Наполняем словарь из двух списков:
-	my_dict[ls2[i]] = ls1[i]  # ls2 список ключей, ls1 список значений.
+for i in range(3):              # Наполняем словарь из двух списков:
+	my_dict[ls2[i]] = ls1[i]    # ls2 список ключей, ls1 список значений.
 print(f'\n my_dict: {my_dict}')
           # Ещё можно и так. Который список короче, столько элементов получится.
 my_dict2 = dict(zip(ls2, ls1[:3]))
