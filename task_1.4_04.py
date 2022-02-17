@@ -13,11 +13,13 @@ for channel, volume in stats.items():
    else:
        print(f"'{channel}': {volume}", end='')
 print('}')
-
 print('\n Вывод:')
-#stat_max = max(stats.items(), key=lambda x: x[1])           # Мой вариант
+					# Мой вариант
+#stat_max = max(stats.items(), key=lambda x: x[1])
 #print(f" Канал с максимальным объёмом: '{stat_max[0]}'")
-stat_max = max(stats, key=stats.get)    # Вариант проверившего, Александр Бардин
+
+					# Вариант проверившего, Александр Бардин
+stat_max = max(stats, key=stats.get)
 print(f" Канал с максимальным объёмом: '{stat_max}'")
 
 input('\n  -- Конец --  ')	#	Типа  "Пауза" - Для консоли

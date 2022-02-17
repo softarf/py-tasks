@@ -14,15 +14,21 @@ for user_name, user_id in ids.items():
     else:
         print(f"'{user_name}': {user_id}", end='')
 print('}')
-print()  # Для теста
-all_ids_list = []
+
+all_ids_1 = []
+print(f'\n all_ids_1: {all_ids_1}')  # Для теста
+all_ids_2 = []
+print(f' all_ids_2: {all_ids_2}')  # Для теста
 for key in ids.keys():
-    print(f' {ids[key]}')  # Для теста
-    all_ids_list.extend(ids[key])
+    all_ids_1.extend(ids[key])
+    print(f' key: {key}    ids[key]: {ids[key]}  \tall_ids_1: {all_ids_1}')  # Для теста
+    all_ids_2 += ids[key]
+    print(f' key: {key}    ids[key]: {ids[key]}  \tall_ids_2: {all_ids_2}')  # Для теста
 #
-print(f' all_ids: {all_ids_list}')  # Для теста
+all_ids_set = set(all_ids_1)
 #
-all_ids_set = set(all_ids_list)
+print(f'\n all_ids_set: {all_ids_set}')  # Для теста
+#
 geo_ids = list(all_ids_set)
 print(f'\n Вывод:\n geo_ids = {geo_ids}')
 

@@ -36,7 +36,7 @@ print('\n Вывод:')
 for index in range(10):
 	if len_list[index] > 0:
 		percen = len_list[index] / total
-		print(f' Запросов из {index+1} слов - {percen: .0%}')
+		print(f' Запросов из {index+1} слов', '\t-', f' {percen: .0%}')
 if len_list[10] > 0:
 	percen = len_list[10] / total
 	print(f' Запросов длиною свыше 10-ти слов - {percen: .0%}')
