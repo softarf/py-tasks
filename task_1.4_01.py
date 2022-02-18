@@ -27,12 +27,14 @@ ru_logs = []
 for visit in geo_logs:
     # Получилась очень сложная вложенная структура элемента:
     # visit.values()  ==>  dict_values([['Архангельск', 'Россия']])
-    #print(f'     {visit.values()}')  #  ==>  dict_values([['Архангельск', 'Россия']])
+    print(f'     {visit}')  #  ==>  dict_values([['Архангельск', 'Россия']])
+    print(f'     {visit.values()}')  #  ==>  dict_values([['Архангельск', 'Россия']])
     #print(f'     {list(visit.values())}')  #  ==>  [['Архангельск', 'Россия']]
     #print(f'     {list(visit.values())[0]}')  #  ==>  ['Архангельск', 'Россия']
     #print(f'     {list(visit.values())[0][1]}')  #  ==>  Россия
     #if list(visit.values())[0][1] == 'Россия':
     if 'Россия'in list(visit.values())[0]:
+    	# if 'Россия'in visit.values():  -  так не работает ?!?!
         ru_logs.append(visit)
 #
 #my_str = str(visit.values())
