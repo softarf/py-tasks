@@ -27,18 +27,21 @@ ru_logs = []
 for visit in geo_logs:
     # Получилась очень сложная вложенная структура элемента:
     # visit.values()  ==>  dict_values([['Архангельск', 'Россия']])
-    print(f'     {visit}')  #  ==>  dict_values([['Архангельск', 'Россия']])
-    print(f'     {visit.values()}')  #  ==>  dict_values([['Архангельск', 'Россия']])
+    # print(f'     {visit}', end='')           #  ==>  {'visit1': ['Москва', 'Россия']}
+    # print(f'     {visit.values()}')  #  ==>  dict_values([['Архангельск', 'Россия']])
     #print(f'     {list(visit.values())}')  #  ==>  [['Архангельск', 'Россия']]
     #print(f'     {list(visit.values())[0]}')  #  ==>  ['Архангельск', 'Россия']
     #print(f'     {list(visit.values())[0][1]}')  #  ==>  Россия
     #if list(visit.values())[0][1] == 'Россия':
-    if 'Россия'in list(visit.values())[0]:
-    	# if 'Россия'in visit.values():  -  так не работает ?!?!
-        ru_logs.append(visit)
+    # if 'Россия'in visit.values():    # Так не работает ?!?!
+    # if 'Россия'in list(visit.values())[0]:    # Сложное выражение, для извлечения данных.
+    for vis in visit.values():    # После присваивания всё лишнее отбрасывается, получим чистое значение.
+        # print(f' vis: {vis}')
+        if 'Россия'in vis:
+            ru_logs.append(visit)
 #
-#my_str = str(visit.values())
-#print(f"\n 'visit.values()': {my_str}")
+# my_str = str(visit.values())
+# print(f"\n 'visit.values()': {my_str}")
 #
 print('\n Вывод:\n ru_logs = [', end='')
 idx = 0
